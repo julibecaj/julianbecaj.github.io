@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Julian Becaj — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- BOOT SCREEN -->
+<div id="boot">
+  <div class="boot-line">$ initializing portfolio.sh...</div>
+  <div class="boot-line">▸ loading modules: [react] [springboot] [nextjs] ✓</div>
+  <div class="boot-line">▸ fetching experience data... done</div>
+  <div class="boot-line">▸ compiling projects... 3 found</div>
+  <div class="boot-line">▸ all systems operational</div>
+  <div class="boot-line">$ Welcome, Julian Becaj — Full Stack Engineer</div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-prompt">
+        <span class="user">julian</span>@<span class="user">becaj</span>:<span style="color:var(--yellow)">~</span> <span style="color:var(--text-dim)">$</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">about</a>
+        <a href="#skills">skills</a>
+        <a href="#experience">experience</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="terminal-window">
+        <div class="terminal-titlebar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="titlebar-text">julian@becaj: ~ — bash</span>
+        </div>
+        <div class="terminal-body">
+          <div class="prompt-line">
+            <span class="ps1"><span class="user">julian</span>@<span class="user">becaj</span>:<span class="path">~</span> <span class="dollar">$</span></span>
+            <span class="cmd"> cat about.txt</span>
+          </div>
+          <div class="output">
+            <div class="ascii-name">
+ ██╗██╗   ██╗██╗     ██╗ █████╗ ███╗   ██╗    ██████╗ ███████╗ ██████╗ █████╗      ██╗
+ ██║██║   ██║██║     ██║██╔══██╗████╗  ██║    ██╔══██╗██╔════╝██╔════╝██╔══██╗     ██║
+ ██║██║   ██║██║     ██║███████║██╔██╗ ██║    ██████╔╝█████╗  ██║     ███████║     ██║
+██ ██║██║   ██║██║     ██║██╔══██║██║╚██╗██║    ██╔══██╗██╔══╝  ██║     ██╔══██║██   ██║
+╚████╔╝╚██████╔╝███████╗██║██║  ██║██║ ╚████║    ██████╔╝███████╗╚██████╗██║  ██║╚█████╔╝
+ ╚═══╝  ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚═════╝ ╚══════╝ ╚═════╝╚═╝  ╚═╝ ╚════╝</div>
+            <div class="hero-subtitle">// Full-Stack Software Engineer</div>
+            <div class="hero-desc">
+              Software Engineering student at University of New York Tirana.
+              I build full-stack web applications — from REST APIs in Spring Boot
+              to responsive UIs in React &amp; Next.js. Currently building things that matter.
+            </div>
+            <div class="hero-links">
+              <a href="mailto:julian.becaj16@gmail.com" class="btn btn-green">✉ contact me</a>
+              <a href="https://github.com/julibecaj" target="_blank" class="btn btn-cyan">⌥ github</a>
+              <a href="https://linkedin.com/in/julian-becaj" target="_blank" class="btn btn-cyan">⌥ linkedin</a>
+            </div>
+          </div>
+          <div class="prompt-line">
+            <span class="ps1"><span class="user">julian</span>@<span class="user">becaj</span>:<span class="path">~</span> <span class="dollar">$</span></span>
+            <span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO GRID -->
+    <div class="about-grid" style="margin-bottom: 70px;">
+      <div class="info-block">
+        <div class="label">// location</div>
+        <div class="value">📍 Tirana, Albania</div>
+      </div>
+      <div class="info-block">
+        <div class="label">// education</div>
+        <div class="value">Software Engineering — UNYT (2023–2026)</div>
+      </div>
+      <div class="info-block">
+        <div class="label">// email</div>
+        <div class="value"><a href="mailto:julian.becaj16@gmail.com">julian.becaj16@gmail.com</a></div>
+      </div>
+      <div class="info-block">
+        <div class="label">// status</div>
+        <div class="value" style="color: var(--green);">● open to opportunities</div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-header">
+        <span class="prompt-prefix">$</span>
+        <span class="section-title">cat skills.json</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <div class="skill-cat-label">languages</div>
+          <div class="skill-tags">
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">C#</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-label">frontend</div>
+          <div class="skill-tags">
+            <span class="tag">React.js</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-label">backend</div>
+          <div class="skill-tags">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">ASP.NET MVC</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-label">databases</div>
+          <div class="skill-tags">
+            <span class="tag">MySQL</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Oracle SQL</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-label">tools</div>
+          <div class="skill-tags">
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Postman</span>
+            <span class="tag">Figma</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <div class="skill-cat-label">concepts</div>
+          <div class="skill-tags">
+            <span class="tag">OOP</span>
+            <span class="tag">MVC</span>
+            <span class="tag">DSA</span>
+            <span class="tag">Agile</span>
+            <span class="tag">UI/UX</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-header">
+        <span class="prompt-prefix">$</span>
+        <span class="section-title">cat experience.log</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-header">
+            <div>
+              <div class="tl-role">Software Engineer Intern</div>
+              <div class="tl-company">Vodafone Albania</div>
+            </div>
+            <div class="tl-date">08/2025 – 09/2025</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Built a full-stack web app using React.js, Next.js & Java Spring Boot with secure auth and profile management</li>
+            <li>Designed and integrated RESTful APIs for reliable client-server communication and DB persistence</li>
+            <li>Implemented token-based auth, CORS policies, and access control mechanisms</li>
+            <li>Developed reusable, modular UI components for scalability and maintainability</li>
+            <li>Tested APIs with Postman, collaborated via Git/GitHub in an Agile workflow</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-header">
+            <div>
+              <div class="tl-role">Frontend Developer Intern</div>
+              <div class="tl-company">Dominusoft</div>
+            </div>
+            <div class="tl-date">03/2025 – 04/2025</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Delivered a responsive web interface using HTML, CSS & JavaScript across all devices</li>
+            <li>Implemented interactive and dynamic UI elements to enhance user experience</li>
+            <li>Translated requirements into functional frontend features with clean, well-structured code</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-header">
+            <div>
+              <div class="tl-role">IT Support Intern</div>
+              <div class="tl-company">Infinity Investment</div>
+            </div>
+            <div class="tl-date">06/2024 – 09/2024</div>
+          </div>
+          <ul class="tl-bullets">
+            <li>Provided day-to-day technical support for hardware, software, and network issues</li>
+            <li>Managed user access to Office 365 accounts and shared folder infrastructure</li>
+            <li>Assisted in chip-based access control system setup and maintenance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-header">
+        <span class="prompt-prefix">$</span>
+        <span class="section-title">ls ./projects</span>
+      </div>
+      <div class="projects-grid">
+
+        <div class="folder-wrap" onclick="openFolder('vodafone')">
+          <div class="folder-icon">
+            <div class="folder-tab"></div>
+            <div class="folder-body">
+              <div class="folder-paper">
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="folder-label">vodafone-app/</div>
+        </div>
+
+        <div class="folder-wrap" onclick="openFolder('driverent')">
+          <div class="folder-icon">
+            <div class="folder-tab"></div>
+            <div class="folder-body">
+              <div class="folder-paper">
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="folder-label">drive-rent/</div>
+        </div>
+
+        <div class="folder-wrap" onclick="openFolder('hotel')">
+          <div class="folder-icon">
+            <div class="folder-tab"></div>
+            <div class="folder-body">
+              <div class="folder-paper">
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+                <div class="folder-paper-line"></div>
+              </div>
+            </div>
+          </div>
+          <div class="folder-label">hotel-mgmt/</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOLDER MODAL -->
+    <div class="folder-modal-overlay" id="modal-overlay" onclick="closeFolder(event)">
+      <div class="folder-modal" id="folder-modal">
+        <div class="modal-titlebar">
+          <button class="modal-close" onclick="closeFolder(null, true)"></button>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="modal-titlebar-path">
+            <span class="p-folder">~/projects</span>
+            <span class="p-sep">/</span>
+            <span class="p-file" id="modal-path"></span>
+            <span class="p-sep">/</span>
+            <span style="color:var(--text-dim)">README.md</span>
+          </div>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE TERMINAL -->
+    <div class="interactive-section">
+      <div class="section-header">
+        <span class="prompt-prefix">$</span>
+        <span class="section-title">./terminal — try it</span>
+      </div>
+      <div id="live-terminal">
+        <div class="terminal-titlebar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="titlebar-text">interactive shell — type 'help' for commands</span>
+        </div>
+        <div id="terminal-output">
+          <div class="t-line"><span class="t-green">julian@becaj</span><span class="t-dim">:</span><span class="t-cyan">~</span><span class="t-dim"> $ </span><span class="t-white">./welcome.sh</span></div>
+          <div class="t-line t-dim">Type a command below. Try <span class="t-green">help</span> to get started.</div>
+        </div>
+        <div class="hint-chips">
+          <button class="hint-chip" onclick="runCmd('help')">help</button>
+          <button class="hint-chip" onclick="runCmd('whoami')">whoami</button>
+          <button class="hint-chip" onclick="runCmd('skills')">skills</button>
+          <button class="hint-chip" onclick="runCmd('projects')">projects</button>
+          <button class="hint-chip" onclick="runCmd('contact')">contact</button>
+          <button class="hint-chip" onclick="runCmd('experience')">experience</button>
+        </div>
+        <div class="terminal-input-row">
+          <span class="input-ps1"><span style="color:var(--green)">julian</span>@<span style="color:var(--green)">becaj</span>:<span style="color:var(--cyan)">~</span> $</span>
+          <input id="cmd-input" type="text" autocomplete="off" spellcheck="false" placeholder="enter command..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header">
+        <span class="prompt-prefix">$</span>
+        <span class="section-title">cat contact.txt</span>
+      </div>
+      <div class="contact-terminal">
+        <div class="terminal-titlebar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span class="titlebar-text">contact.txt</span>
+        </div>
+        <div class="contact-body">
+          <div class="t-line t-dim">// Let's build something together.</div>
+          <div class="contact-links">
+            <div class="contact-row">
+              <span class="contact-key">email</span>
+              <span class="t-dim">→</span>
+              <a href="mailto:julian.becaj16@gmail.com">julian.becaj16@gmail.com</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">github</span>
+              <span class="t-dim">→</span>
+              <a href="https://github.com/julibecaj" target="_blank">github.com/julibecaj</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">linkedin</span>
+              <span class="t-dim">→</span>
+              <a href="https://linkedin.com/in/julian-becaj" target="_blank">linkedin.com/in/julian-becaj</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">phone</span>
+              <span class="t-dim">→</span>
+              <span style="color:var(--text)">+355 69 450 2291</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">location</span>
+              <span class="t-dim">→</span>
+              <span style="color:var(--text)">Tirana, Albania</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <footer>
+    <div class="container">
+      <span>julian@becaj</span>:~$ echo "Built with ❤ and too much caffeine" &nbsp;|&nbsp; 2026
+    </div>
+  </footer>
+
+</div><!-- /main -->
+
+<script src="script.js"></script>
+</body>
+</html>
