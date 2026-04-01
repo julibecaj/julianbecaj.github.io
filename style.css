@@ -125,6 +125,12 @@ body::after {
   justify-content: space-between;
 }
 
+.logo {
+  height: 24px;
+  width: auto;
+  margin-right: 12px;
+}
+
 .topbar-prompt {
   color: var(--green);
   font-size: 13px;
