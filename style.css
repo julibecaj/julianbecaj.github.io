@@ -647,6 +647,21 @@ footer {
 
 footer span { color: var(--green); }
 
+.visitor-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--text-dim);
+  font-size: 11px;
+}
+
+.visitor-line span { color: var(--text-dim); }
+.visitor-line .visitor-prompt { color: var(--green); }
+.visitor-line #visitor-count { color: var(--cyan); }
+
 /* ── INTERACTIVE TERMINAL ── */
 .interactive-section { padding: 0 0 70px; }
 

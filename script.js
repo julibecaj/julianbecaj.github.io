@@ -158,3 +158,21 @@ window.runCmd = function(cmd) {
 input.addEventListener('keydown', e => {
   if (e.key === 'Enter') window.runCmd(input.value);
 });
+
+// Visitor count is public only after enabling it in GoatCounter settings.
+document.addEventListener('DOMContentLoaded', () => {
+  const visitorCount = document.getElementById('visitor-count');
+  if (!visitorCount) return;
+
+  fetch('https://julianbecaj.goatcounter.com/counter/TOTAL.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Counter unavailable');
+      return response.json();
+    })
+    .then(data => {
+      visitorCount.textContent = data.count || '0';
+    })
+    .catch(() => {
+      visitorCount.textContent = 'unavailable';
+    });
+});
