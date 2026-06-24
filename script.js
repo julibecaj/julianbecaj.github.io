@@ -172,7 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       visitorCount.textContent = data.count || '0';
     })
-    .catch(() => {
-      visitorCount.textContent = 'unavailable';
+    .catch(error => {
+      console.warn('GoatCounter visitor count is not public yet.', error);
+      visitorCount.textContent = '0';
+      visitorCount.title = 'Enable public visitor counts in GoatCounter settings, then visit the deployed site.';
     });
 });
