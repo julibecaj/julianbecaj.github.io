@@ -63,6 +63,18 @@ let activePreviewUrl = '';
 let previewLoadTimeout = null;
 let previouslyFocusedElement = null;
 
+function normalizeList(value) {
+  if (Array.isArray(value)) {
+    return value.filter(item => typeof item === 'string' && item.trim());
+  }
+
+  if (typeof value === 'string' && value.trim()) {
+    return [value.trim()];
+  }
+
+  return [];
+}
+
 function isConfiguredUrl(url) {
   return typeof url === 'string' && /^https?:\/\//i.test(url) && !url.includes('PASTE_');
 }
@@ -85,6 +97,8 @@ window.openFolder = function(id) {
   const liveLink = externalLinkAttributes(p.liveUrl);
   const sourceLink = externalLinkAttributes(p.githubUrl);
   const hasLivePreview = p.previewType === 'iframe' && isConfiguredUrl(p.liveUrl);
+  const stack = normalizeList(p.stack);
+  const bullets = normalizeList(p.bullets);
 
   previouslyFocusedElement = document.activeElement;
   activePreviewUrl = hasLivePreview ? p.liveUrl : '';
@@ -92,11 +106,11 @@ window.openFolder = function(id) {
   modalBody.innerHTML = `
     <div class="modal-proj-name" id="modal-project-title">${p.name}</div>
     <div class="modal-proj-type">${p.type}</div>
-    <div class="modal-desc">${p.desc}</div>
+    <div class="modal-desc">${p.desc || 'Project details coming soon.'}</div>
     <div class="modal-section-label">// stack</div>
-    <div class="modal-stack">${p.stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}</div>
+    <div class="modal-stack">${stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}</div>
     <div class="modal-section-label">// features</div>
-    <ul class="modal-bullets">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+    <ul class="modal-bullets">${bullets.length ? bullets.map(b => `<li>${b}</li>`).join('') : '<li>More details coming soon.</li>'}</ul>
     <div class="project-actions">
       <a class="project-action${liveLink.className}" href="${liveLink.href}" target="_blank" rel="noopener noreferrer"${liveLink.accessibility}>↗ Open Live Site</a>
       <a class="project-action${sourceLink.className}" href="${sourceLink.href}" target="_blank" rel="noopener noreferrer"${sourceLink.accessibility}>⌥ View Source Code</a>
