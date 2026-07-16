@@ -45,6 +45,17 @@ window.projects = {
     liveUrl: 'PASTE_HOTEL_LIVE_URL_HERE',
     githubUrl: 'PASTE_HOTEL_GITHUB_URL_HERE',
     previewType: 'iframe'
+  },
+  soul:{
+    path: 'soul',
+    name: 'Soul',
+    type: 'Full-Stack Music Web Application · (In Progress)',
+    desc: '',
+    stack: ['React', 'Next.js', 'Typescript', 'Java', 'Spring Boot', 'Postman', 'Figma', 'PostgreSQL'],
+    bullets: '',
+    liveUrl: 'https://soul-web-app-git-master-julian-becajs-projects.vercel.app',
+    githubUrl: '',
+    previewType: 'iframe'
   }
 };
 
