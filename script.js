@@ -11,7 +11,10 @@ window.projects = {
       'Designed and integrated RESTful APIs for reliable client-server communication and DB persistence',
       'Built reusable, modular UI components to improve scalability and maintainability',
       'Tested and validated all API flows using Postman in an Agile workflow',
-    ]
+    ],
+    liveUrl: 'PASTE_VODAFONE_LIVE_URL_HERE',
+    githubUrl: 'PASTE_VODAFONE_GITHUB_URL_HERE',
+    previewType: 'iframe'
   },
   driverent: {
     path: 'drive-rent',
@@ -23,7 +26,10 @@ window.projects = {
       'Designed and implemented a fully responsive layout across desktop and mobile',
       'Built interactive UI components improving user engagement and navigation flow',
       'Applied clean semantic HTML and CSS structure for cross-browser compatibility',
-    ]
+    ],
+    liveUrl: 'PASTE_DRIVERENT_LIVE_URL_HERE',
+    githubUrl: 'PASTE_DRIVERENT_GITHUB_URL_HERE',
+    previewType: 'iframe'
   },
   hotel: {
     path: 'hotel-mgmt',
@@ -35,35 +41,193 @@ window.projects = {
       'Implemented server-side logic using ASP.NET MVC following strict MVC architectural patterns',
       'Designed and queried a relational database schema using Oracle SQL',
       'Improved data consistency and reduced manual operations through automation logic',
-    ]
+    ],
+    liveUrl: 'PASTE_HOTEL_LIVE_URL_HERE',
+    githubUrl: 'PASTE_HOTEL_GITHUB_URL_HERE',
+    previewType: 'iframe'
   }
 };
 
+let activePreviewUrl = '';
+let previewLoadTimeout = null;
+let previouslyFocusedElement = null;
+
+function isConfiguredUrl(url) {
+  return typeof url === 'string' && /^https?:\/\//i.test(url) && !url.includes('PASTE_');
+}
+
+function externalLinkAttributes(url) {
+  const configured = isConfiguredUrl(url);
+  return {
+    href: configured ? url : '#',
+    className: configured ? '' : ' is-disabled',
+    accessibility: configured ? '' : ' aria-disabled="true" tabindex="-1"'
+  };
+}
+
 window.openFolder = function(id) {
   const p = window.projects[id];
+  if (!p) return;
+
+  const overlay = document.getElementById('modal-overlay');
+  const modalBody = document.getElementById('modal-body');
+  const liveLink = externalLinkAttributes(p.liveUrl);
+  const sourceLink = externalLinkAttributes(p.githubUrl);
+  const hasLivePreview = p.previewType === 'iframe' && isConfiguredUrl(p.liveUrl);
+
+  previouslyFocusedElement = document.activeElement;
+  activePreviewUrl = hasLivePreview ? p.liveUrl : '';
   document.getElementById('modal-path').textContent = p.path;
-  document.getElementById('modal-body').innerHTML = `
-    <div class="modal-proj-name">${p.name}</div>
+  modalBody.innerHTML = `
+    <div class="modal-proj-name" id="modal-project-title">${p.name}</div>
     <div class="modal-proj-type">${p.type}</div>
     <div class="modal-desc">${p.desc}</div>
     <div class="modal-section-label">// stack</div>
     <div class="modal-stack">${p.stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}</div>
-    <div class="modal-section-label">// highlights</div>
+    <div class="modal-section-label">// features</div>
     <ul class="modal-bullets">${p.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+    <div class="project-actions">
+      <a class="project-action${liveLink.className}" href="${liveLink.href}" target="_blank" rel="noopener noreferrer"${liveLink.accessibility}>↗ Open Live Site</a>
+      <a class="project-action${sourceLink.className}" href="${sourceLink.href}" target="_blank" rel="noopener noreferrer"${sourceLink.accessibility}>⌥ View Source Code</a>
+    </div>
+    <div class="modal-section-label">// live preview</div>
+    <div class="project-preview" data-preview-mode="desktop">
+      <div class="preview-toolbar">
+        <div class="preview-address" title="${hasLivePreview ? p.liveUrl : 'Live URL not configured'}">${hasLivePreview ? p.liveUrl : 'Live URL not configured'}</div>
+        <div class="preview-controls" aria-label="Preview controls">
+          <button type="button" class="preview-control active" data-preview-mode="desktop" aria-pressed="true" onclick="setPreviewMode('desktop')">Desktop</button>
+          <button type="button" class="preview-control" data-preview-mode="mobile" aria-pressed="false" onclick="setPreviewMode('mobile')">Mobile</button>
+          <button type="button" class="preview-control" id="refresh-preview" onclick="refreshPreview()"${hasLivePreview ? '' : ' disabled'}>↻ Refresh</button>
+        </div>
+      </div>
+      <div class="preview-frame-container">
+        <div class="preview-loading" role="status" aria-live="polite"${hasLivePreview ? '' : ' hidden'}>Loading preview...</div>
+        <div class="preview-frame-shell">
+          <iframe id="project-preview-frame" title="${p.name} live website preview" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="preview-fallback" role="status"${hasLivePreview ? ' hidden' : ''}>
+          <p>${hasLivePreview ? 'The live preview could not be displayed inside the portfolio. Some websites block embedded previews.' : 'No live preview URL has been configured for this project yet.'}</p>
+          <a class="preview-external-link${liveLink.className}" href="${liveLink.href}" target="_blank" rel="noopener noreferrer"${liveLink.accessibility}>Open Live Site</a>
+        </div>
+      </div>
+      <div class="preview-embed-note">// Some websites block iframe embedding. If the preview is blank, use “Open Live Site”.</div>
+    </div>
   `;
-  document.getElementById('modal-overlay').classList.add('open');
+
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+
+  if (hasLivePreview) loadPreview(p.liveUrl);
+  document.querySelector('.modal-close').focus();
 };
 
+function loadPreview(url) {
+  const frame = document.getElementById('project-preview-frame');
+  const loading = document.querySelector('.preview-loading');
+  const fallback = document.querySelector('.preview-fallback');
+  if (!frame || !loading || !fallback || !isConfiguredUrl(url)) return;
+
+  clearTimeout(previewLoadTimeout);
+  loading.hidden = false;
+  fallback.hidden = true;
+
+  frame.onload = () => {
+    clearTimeout(previewLoadTimeout);
+    loading.hidden = true;
+  };
+  frame.onerror = () => showPreviewFallback();
+  frame.src = url;
+
+  previewLoadTimeout = window.setTimeout(() => {
+    if (!loading.hidden) showPreviewFallback();
+  }, 15000);
+}
+
+function showPreviewFallback() {
+  clearTimeout(previewLoadTimeout);
+  const loading = document.querySelector('.preview-loading');
+  const fallback = document.querySelector('.preview-fallback');
+  if (loading) loading.hidden = true;
+  if (fallback) fallback.hidden = false;
+}
+
+window.setPreviewMode = function(mode) {
+  if (!['desktop', 'mobile'].includes(mode)) return;
+  const preview = document.querySelector('.project-preview');
+  if (!preview) return;
+
+  preview.dataset.previewMode = mode;
+  preview.querySelectorAll('[data-preview-mode]').forEach(button => {
+    const active = button.dataset.previewMode === mode;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+};
+
+window.refreshPreview = function() {
+  const frame = document.getElementById('project-preview-frame');
+  if (!frame || !isConfiguredUrl(activePreviewUrl)) return;
+
+  frame.onload = null;
+  frame.onerror = null;
+  frame.removeAttribute('src');
+  window.requestAnimationFrame(() => loadPreview(activePreviewUrl));
+};
+
+function cleanupPreview() {
+  clearTimeout(previewLoadTimeout);
+  previewLoadTimeout = null;
+  activePreviewUrl = '';
+
+  const frame = document.getElementById('project-preview-frame');
+  if (frame) {
+    frame.onload = null;
+    frame.onerror = null;
+    frame.removeAttribute('src');
+  }
+
+  document.getElementById('modal-body').innerHTML = '';
+}
+
 window.closeFolder = function(e, force = false) {
-  if (force || (e && e.target === document.getElementById('modal-overlay'))) {
-    document.getElementById('modal-overlay').classList.remove('open');
+  const overlay = document.getElementById('modal-overlay');
+  const shouldClose = force || (e && e.target === overlay);
+  if (shouldClose && overlay.classList.contains('open')) {
+    cleanupPreview();
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (previouslyFocusedElement) previouslyFocusedElement.focus();
+    previouslyFocusedElement = null;
   }
 };
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') window.closeFolder(null, true);
+  const overlay = document.getElementById('modal-overlay');
+  if (!overlay.classList.contains('open')) return;
+
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    window.closeFolder(null, true);
+    return;
+  }
+
+  if (e.key === 'Tab') {
+    const focusable = [...overlay.querySelectorAll('button:not(:disabled), a[href]:not([aria-disabled="true"]), iframe, [tabindex]:not([tabindex="-1"])')]
+      .filter(element => element.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 });
 
 // ── INTERACTIVE TERMINAL ──
@@ -157,24 +321,4 @@ window.runCmd = function(cmd) {
 
 input.addEventListener('keydown', e => {
   if (e.key === 'Enter') window.runCmd(input.value);
-});
-
-// Visitor count is public only after enabling it in GoatCounter settings.
-document.addEventListener('DOMContentLoaded', () => {
-  const visitorCount = document.getElementById('visitor-count');
-  if (!visitorCount) return;
-
-  fetch('https://julianbecaj.goatcounter.com/counter/TOTAL.json')
-    .then(response => {
-      if (!response.ok) throw new Error('Counter unavailable');
-      return response.json();
-    })
-    .then(data => {
-      visitorCount.textContent = data.count || '0';
-    })
-    .catch(error => {
-      console.warn('GoatCounter visitor count is not public yet.', error);
-      visitorCount.textContent = '0';
-      visitorCount.title = 'Enable public visitor counts in GoatCounter settings, then visit the deployed site.';
-    });
 });

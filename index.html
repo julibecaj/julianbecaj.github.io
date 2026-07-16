@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.png">
   <title>Julian Becaj — Portfolio</title>
-  <script data-goatcounter="https://julianbecaj.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -73,8 +71,8 @@
             </div>
             <div class="hero-links">
               <a href="mailto:julian.becaj16@gmail.com" class="btn btn-green">✉ contact me</a>
-              <a href="https://github.com/julibecaj" target="_blank" class="btn btn-cyan">⌥ github</a>
-              <a href="https://linkedin.com/in/julian-becaj" target="_blank" class="btn btn-cyan">⌥ linkedin</a>
+              <a href="https://github.com/julibecaj" target="_blank" rel="noopener noreferrer" class="btn btn-cyan">⌥ github</a>
+              <a href="https://linkedin.com/in/julian-becaj" target="_blank" rel="noopener noreferrer" class="btn btn-cyan">⌥ linkedin</a>
             </div>
           </div>
           <div class="prompt-line">
@@ -229,7 +227,7 @@
       </div>
       <div class="projects-grid">
 
-        <div class="folder-wrap" onclick="openFolder('vodafone')">
+        <button type="button" class="folder-wrap" onclick="openFolder('vodafone')" aria-haspopup="dialog">
           <div class="folder-icon">
             <div class="folder-tab"></div>
             <div class="folder-body">
@@ -241,9 +239,9 @@
             </div>
           </div>
           <div class="folder-label">vodafone-app/</div>
-        </div>
+        </button>
 
-        <div class="folder-wrap" onclick="openFolder('driverent')">
+        <button type="button" class="folder-wrap" onclick="openFolder('driverent')" aria-haspopup="dialog">
           <div class="folder-icon">
             <div class="folder-tab"></div>
             <div class="folder-body">
@@ -255,9 +253,9 @@
             </div>
           </div>
           <div class="folder-label">drive-rent/</div>
-        </div>
+        </button>
 
-        <div class="folder-wrap" onclick="openFolder('hotel')">
+        <button type="button" class="folder-wrap" onclick="openFolder('hotel')" aria-haspopup="dialog">
           <div class="folder-icon">
             <div class="folder-tab"></div>
             <div class="folder-body">
@@ -269,16 +267,16 @@
             </div>
           </div>
           <div class="folder-label">hotel-mgmt/</div>
-        </div>
+        </button>
 
       </div>
     </section>
 
     <!-- FOLDER MODAL -->
-    <div class="folder-modal-overlay" id="modal-overlay" onclick="closeFolder(event)">
-      <div class="folder-modal" id="folder-modal">
+    <div class="folder-modal-overlay" id="modal-overlay" onclick="closeFolder(event)" aria-hidden="true">
+      <div class="folder-modal" id="folder-modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" tabindex="-1">
         <div class="modal-titlebar">
-          <button class="modal-close" onclick="closeFolder(null, true)"></button>
+          <button type="button" class="modal-close" onclick="closeFolder(null, true)" aria-label="Close project preview"></button>
           <div class="dot dot-yellow"></div>
           <div class="dot dot-green"></div>
           <div class="modal-titlebar-path">
@@ -349,12 +347,12 @@
             <div class="contact-row">
               <span class="contact-key">github</span>
               <span class="t-dim">→</span>
-              <a href="https://github.com/julibecaj" target="_blank">github.com/julibecaj</a>
+              <a href="https://github.com/julibecaj" target="_blank" rel="noopener noreferrer">github.com/julibecaj</a>
             </div>
             <div class="contact-row">
               <span class="contact-key">linkedin</span>
               <span class="t-dim">→</span>
-              <a href="https://linkedin.com/in/julian-becaj" target="_blank">linkedin.com/in/julian-becaj</a>
+              <a href="https://linkedin.com/in/julian-becaj" target="_blank" rel="noopener noreferrer">linkedin.com/in/julian-becaj</a>
             </div>
             <div class="contact-row">
               <span class="contact-key">phone</span>
@@ -376,11 +374,6 @@
   <footer>
     <div class="container">
       <span>julian@becaj</span>:~$ echo "Built with ❤ and too much caffeine" &nbsp;|&nbsp; 2026
-    </div>
-    <div class="visitor-line" aria-live="polite">
-      <span class="visitor-prompt">portfolio@stats:~$</span>
-      <span>visitors:</span>
-      <span id="visitor-count">loading</span>
     </div>
   </footer>
 
